@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     let email = new Email()
     email.contenido = this.editorForm.get('editor')!.value
     email.enviado_por = "corvohyatt@gmail.com"
-    email.recibido_por = "snifex@gmail.com"
+    email.para = "snifex@gmail.com"
     email.asunto = "Saludos cordiales"
     email.fecha = "10/10/10"
   }

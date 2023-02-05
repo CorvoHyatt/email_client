@@ -35,7 +35,7 @@
               "./node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
-               "./node_modules/quill/dist/quill.js",
+               "./node_modules/quill/dist/quill.js"
             ]
           },
           "configurations": {
@@ -104,5 +104,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c6675702-e378-4353-a7b8-c0662ecda6a7"
   }
 }

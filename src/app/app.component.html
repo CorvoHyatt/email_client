@@ -110,12 +110,10 @@
         <div class="container-fluid text-center">
           <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label for="para"><h4>Para</h4></label>
-              <input type = "text" formControlName="para">
+              <input type = "email" formControlName="para" placeholder = "Para:">
             </div>
             <div class="form-group">
-              <label for="asunto"><h4>Asunto:</h4></label>
-              <input type = "text" formControlName="asunto">
+              <input type = "text" formControlName="asunto" placeholder = "Asunto">
             </div>
             <div class="form-group">
               <quill-editor [modules] = "config" formControlName="contenido"></quill-editor>

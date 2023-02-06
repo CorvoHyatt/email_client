@@ -108,19 +108,27 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid text-center">
-          <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label for="Editor"><h3>Editor</h3></label>
-              <quill-editor class="editorStyle" [modules] = "config" formControlName="editor"></quill-editor>
+              <label for="para"><h4>Para</h4></label>
+              <input type = "text" formControlName="para">
+            </div>
+            <div class="form-group">
+              <label for="asunto"><h4>Asunto:</h4></label>
+              <input type = "text" formControlName="asunto">
+            </div>
+            <div class="form-group">
+              <quill-editor [modules] = "config" formControlName="contenido"></quill-editor>
             </div>
             <button class="waves-effect waves-light btn">Enviar</button>
           </form>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      <!-- Quitar estos botones y dejar el boton de enviar del form  -->
+      <!-- <div class="modal-footer"> -->
+      <!--   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+      <!--   <button type="button" class="btn btn-primary">Save changes</button> -->
+      <!-- </div> -->
     </div>
   </div>
 </div>

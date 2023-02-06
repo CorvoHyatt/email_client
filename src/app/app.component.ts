@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  editorForm!: FormGroup
+  emailForm!: FormGroup
   
   mensaje: string = "Hola"
   emailsPrueba : Email[] = [];
@@ -24,12 +24,15 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    this.mensaje = this.emailForm.get('contenido')!.value
+    console.log(this.emailForm.get('contenido')!.value);
   }
 
   ngOnInit() {
-    this.editorForm = new FormGroup({
-      'editor': new FormControl(null)
+    this.emailForm = new FormGroup({
+      'contenido': new FormControl(''),
+      'para'   : new FormControl(''),
+      'asunto' : new FormControl('')
     })
     const email = new Email()
     email.enviado_por = "corvohyatt@gmail.com"

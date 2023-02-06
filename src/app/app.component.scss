@@ -1,5 +1,5 @@
 //PC
-@media (max-width: 1440px) {
+@media (min-width: 1440px) {
     .editorStyle{
         height: 300px;
         width: 700px;
@@ -22,3 +22,6 @@
     color: #ffc107;
 }
 
+.list-group{
+    cursor: pointer;
+}

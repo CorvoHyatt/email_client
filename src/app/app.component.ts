@@ -13,7 +13,10 @@ export class AppComponent implements OnInit {
   
   mensaje: string = "Hola"
   emailsPrueba : Email[] = [];
-
+  emailsPruebaRecibidos: Email[] = [];
+  flagRecibidos: boolean = false;
+  flagEnviados: boolean = true;
+  correoActual: Email = new Email();
 
   config = {
     toolbar: [
@@ -26,6 +29,20 @@ export class AppComponent implements OnInit {
   onSubmit() {
     this.mensaje = this.emailForm.get('contenido')!.value
     console.log(this.emailForm.get('contenido')!.value);
+  }
+
+  estadoRecibidos(){
+    this.flagRecibidos = true
+    this.flagEnviados = false
+  }
+
+  estadoEnviados(){
+    this.flagRecibidos = false
+    this.flagEnviados = true
+  }
+
+  seleccionaCorreo(email: Email){
+    this.correoActual = email
   }
 
   ngOnInit() {
@@ -48,8 +65,25 @@ export class AppComponent implements OnInit {
     email_aux.fecha = "05/02/2023"
     email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
     
+    const emailAuxRecibidos = new Email()
+    emailAuxRecibidos.enviado_por = "recibidos@gmail.com"
+    emailAuxRecibidos.para = "corvorecibidos@gmail.com"
+    emailAuxRecibidos.asunto = "Saludos cordiales recibidos"
+    emailAuxRecibidos.fecha = "10/02/2023"
+    emailAuxRecibidos.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+  
+    const emailAuxRecibidos2 = new Email()
+    emailAuxRecibidos2.enviado_por = "recibidos@gmail.com"
+    emailAuxRecibidos2.para = "corvorecibidos@gmail.com"
+    emailAuxRecibidos2.asunto = "Saludos cordiales recibidos"
+    emailAuxRecibidos2.fecha = "10/02/2023"
+    emailAuxRecibidos2.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
 
     this.emailsPrueba.push(email,email_aux)
+
+    this.emailsPruebaRecibidos.push(emailAuxRecibidos,emailAuxRecibidos2)
+
+    console.log(this.emailsPruebaRecibidos)
   }
 
 }

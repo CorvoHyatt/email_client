@@ -20,62 +20,106 @@
     </div>
   </div>
 </div> -->
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+          <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+              <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <span class="fs-5 d-none d-sm-inline">Correo</span>
+              </a>
+              <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                  <li class="nav-item">
+                      <a class="nav-link btn align-middle px-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-pencil"></i> 
+                        <span class="ms-1 d-none d-sm-inline text-white" role="button">Crear correo</span>
+                      </a>
+                  </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link btn align-middle px-0">
+                      <i class="fa-solid fa-inbox"></i>
+                      <span class="ms-1 d-none d-sm-inline text-white" role="button">Correos recibidos</span>
+                    </a>
+                </li>
 
+                <li class="nav-item">
+                  <a class="nav-link btn align-middle px-0">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span class="ms-1 d-none d-sm-inline text-white" role="button">Correos enviados</span>
+                  </a>
+              </li>
+              </ul>
+              <hr>
 
-<div class="columns">
-  <!-- Filters -->
-  <div class="column is-one-third">
-    <nav class="panel ">
-      <p class="panel-heading">
-        Correo
-      </p>
-    
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fa-solid fa-pencil"></i>
-        </span>
-        Crear correo
-      </a>
-
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fa-solid fa-inbox"></i>
-        </span>
-        Correos recibidos
-      </a>
-
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fa-solid fa-paper-plane"></i>
-        </span>
-        Correos enviados
-      </a>
-    </nav>
-  </div>
-
-  <div class="column">
-    <div class="box">
-      <div class="columns">
-        <div class="column">
-          <div class="content">
-            <h3>Asunto:</h3>
+              <!-- Footer del html -->
+              <div class="dropdown pb-4">
+                  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                      <span class="d-none d-sm-inline mx-1">loser</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                      <li><a class="dropdown-item" href="#">New project...</a></li>
+                      <li><a class="dropdown-item" href="#">Settings</a></li>
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li>
+                          <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+              </div>
           </div>
-        </div>
-        <div class="column">
-          <div class="content">
-            <h3>Enviado por:</h3>
-          </div>
-        </div>
-        <div class="column">
-          <div class="content">
-            <h3>Hora:</h3>
-          </div>
-        </div>
       </div>
 
-      <div class="box">
-        
+      <!-- Contenido correo -->
+      <div class="col py-3">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let email of emailsPrueba">
+            <div class="container text-center">
+              <div class="row">
+                <div class="col-md-1 ">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-3 ">
+                  {{email.asunto}}
+                </div>
+
+                <div class="col-md-4 ">
+                  {{email.enviado_por}}
+                </div>
+
+                <div class="col-md-2 ">
+                  {{email.fecha}}
+                </div>
+              </div>
+            </div>
+          </li>
+      </ul>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal modal-lg fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear nuevo correo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid text-center">
+          <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="Editor"><h3>Editor</h3></label>
+              <quill-editor class="editorStyle" [modules] = "config" formControlName="editor"></quill-editor>
+            </div>
+            <button class="waves-effect waves-light btn">Enviar</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Email } from './models/email.model';
+
+declare var $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,13 +10,9 @@ import { Email } from './models/email.model';
 })
 export class AppComponent implements OnInit {
   editorForm!: FormGroup
-  editor_Style = {
-    height: '300px',
-    width: '700px',
-    backgroundColor: '#ffffff'
-  }
-
+  
   mensaje: string = "Hola"
+  emailsPrueba : Email[] = [];
 
 
   config = {
@@ -26,19 +24,31 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    this.mensaje = this.editorForm.get('editor')!.value
-    console.log(this.editorForm.get('editor')!.value)
-    let email = new Email()
-    email.contenido = this.editorForm.get('editor')!.value
-    email.enviado_por = "corvohyatt@gmail.com"
-    email.para = "snifex@gmail.com"
-    email.asunto = "Saludos cordiales"
-    email.fecha = "10/10/10"
+    
   }
 
   ngOnInit() {
     this.editorForm = new FormGroup({
       'editor': new FormControl(null)
     })
+    const email = new Email()
+    email.enviado_por = "corvohyatt@gmail.com"
+    email.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    email.para = "snifex@gmail.com"
+    email.asunto = "Saludos cordiales"
+    email.fecha = "10/10/10"
+
+    const email_aux = new Email()
+    email_aux.enviado_por = "snifex@gmail.com"
+    email_aux.para = "corvohyatt@gmail.com"
+    email_aux.asunto = "Saludos cordiales Doctor"
+    email_aux.fecha = "05/02/2023"
+    email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    
+
+    this.emailsPrueba.push(email,email_aux)
   }
+
 }
+
+

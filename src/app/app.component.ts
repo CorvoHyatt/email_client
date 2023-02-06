@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Email } from './models/email.model';
+import { EmailService } from './services/email.service';
 
 declare var $: any;
 @Component({
@@ -18,6 +19,10 @@ export class AppComponent implements OnInit {
   flagEnviados: boolean = true;
   correoActual: Email = new Email();
 
+  usuario: string;
+  para: string;
+  asunto: string;
+
   config = {
     toolbar: [
       ['bold', 'italic', 'underline'],
@@ -26,9 +31,11 @@ export class AppComponent implements OnInit {
     ]
   }
 
-  onSubmit() {
-    this.mensaje = this.emailForm.get('contenido')!.value
-    console.log(this.emailForm.get('contenido')!.value);
+  constructor(private emailService: EmailService) {
+    this.mensaje = "";
+    this.usuario = "corvohyatt@gmail.com"
+    this.para = ""
+    this.asunto = ""
   }
 
   estadoRecibidos(){
@@ -48,8 +55,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.emailForm = new FormGroup({
       'contenido': new FormControl(''),
-      'para'   : new FormControl(''),
-      'asunto' : new FormControl('')
+      'para': new FormControl(''),
+      'asunto': new FormControl('')
     })
     const email = new Email()
     email.enviado_por = "corvohyatt@gmail.com"
@@ -84,6 +91,16 @@ export class AppComponent implements OnInit {
     this.emailsPruebaRecibidos.push(emailAuxRecibidos,emailAuxRecibidos2)
 
     console.log(this.emailsPruebaRecibidos)
+    // this.emailsPrueba.push(email, email_aux)
+    this.emailService.list_correos_by_user(this.usuario).subscribe((resEmail: any) => {
+      this.emailsPrueba = resEmail;
+    })
+  }
+
+
+  onSubmit() {
+    this.mensaje = this.emailForm.get('contenido')!.value
+    console.log(this.emailForm.get('contenido')!.value);
   }
 
 }

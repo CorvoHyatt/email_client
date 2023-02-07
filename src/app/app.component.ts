@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Email } from './models/email.model';
 import { EmailService } from './services/email.service';
 
+const socketURL = "ws://192.168.1.252:8080"
 declare var $: any;
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   correoActual: Email = new Email();
   cuentaLogueada: string = "prueba@logueado.com"
 
+  exampleSocket: any
   usuario: string;
   para: string;
   asunto: string;
@@ -38,6 +40,8 @@ export class AppComponent implements OnInit {
     this.para = ""
     this.asunto = ""
     this.date = new Date();
+    this.exampleSocket = new WebSocket(socketURL);
+
   }
 
   estadoRecibidos() {
@@ -55,6 +59,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.exampleSocket.onopen = (ev: any) => {
+      console.log('Socket opened: ', ev);
+
+    };
+    this.exampleSocket.onmessage = (m: any) => {
+      let message = JSON.parse(m.data);
+      console.log('Message: ', message);
+    };
+    this.exampleSocket.onclose = (ev: any) => {
+      console.log('Socket closed: ', ev);
+    };
+
     this.emailForm = new FormGroup({
       'contenido': new FormControl(''),
       'para': new FormControl(''),
@@ -66,57 +82,79 @@ export class AppComponent implements OnInit {
     email.para = "snifex@gmail.com"
     email.asunto = "Saludos cordiales"
     email.fecha = "10/10/10"
-    
+
     const email_aux = new Email()
     email_aux.enviado_por = "snifex@gmail.com"
     email_aux.para = "corvohyatt@gmail.com"
     email_aux.asunto = "Saludos cordiales Doctor"
     email_aux.fecha = "05/02/2023"
     email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    
+
     const emailAuxRecibidos = new Email()
     emailAuxRecibidos.enviado_por = "recibidos@gmail.com"
     emailAuxRecibidos.para = "corvorecibidos@gmail.com"
     emailAuxRecibidos.asunto = "Saludos cordiales recibidos"
     emailAuxRecibidos.fecha = "10/02/2023"
     emailAuxRecibidos.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    
+
     const emailAuxRecibidos2 = new Email()
     emailAuxRecibidos2.enviado_por = "recibidos@gmail.com"
     emailAuxRecibidos2.para = "corvorecibidos@gmail.com"
     emailAuxRecibidos2.asunto = "Saludos cordiales recibidos"
     emailAuxRecibidos2.fecha = "10/02/2023"
     emailAuxRecibidos2.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    
-    this.emailsEnviados.push(email, email_aux)
-    
-    this.emailsRecibidos.push(emailAuxRecibidos, emailAuxRecibidos2)
-    
-    this.actualizar_correos()
-  }
 
-  actualizar_correos(){
-   this.emailService.list_correos_enviados(this.usuario).subscribe((resEmail: any) => {
-      this.emailsEnviados = resEmail;
-    })
-    this.emailService.list_correos_recibidos(this.usuario).subscribe((resEmail:any) =>{
-      this.emailsRecibidos = resEmail;
-    })
-    setTimeout(this.actualizar_correos,2000)
-  }  
+    this.emailsEnviados.push(email, email_aux)
+
+    this.emailsRecibidos.push(emailAuxRecibidos, emailAuxRecibidos2)
+
+    // const email = new Email()
+    // email.enviado_por = "corvohyatt@gmail.com"
+    // email.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    // email.para = "snifex@gmail.com"
+    // email.asunto = "Saludos cordiales"
+    // email.fecha = "10/10/10"
+    //
+    // const email_aux = new Email()
+    // email_aux.enviado_por = "snifex@gmail.com"
+    // email_aux.para = "corvohyatt@gmail.com"
+    // email_aux.asunto = "Saludos cordiales Doctor"
+    // email_aux.fecha = "05/02/2023"
+    // email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    //
+    // const emailAuxRecibidos = new Email()
+    // emailAuxRecibidos.enviado_por = "recibidos@gmail.com"
+    // emailAuxRecibidos.para = "corvorecibidos@gmail.com"
+    // emailAuxRecibidos.asunto = "Saludos cordiales recibidos"
+    // emailAuxRecibidos.fecha = "10/02/2023"
+    // emailAuxRecibidos.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    //
+    // const emailAuxRecibidos2 = new Email()
+    // emailAuxRecibidos2.enviado_por = "recibidos@gmail.com"
+    // emailAuxRecibidos2.para = "corvorecibidos@gmail.com"
+    // emailAuxRecibidos2.asunto = "Saludos cordiales recibidos"
+    // emailAuxRecibidos2.fecha = "10/02/2023"
+    // emailAuxRecibidos2.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    // //
+    // // this.emailsEnviados.push(email, email_aux)
+    // //
+    // // this.emailsRecibidos.push(emailAuxRecibidos, emailAuxRecibidos2)
+    // //
+
+  }
 
   onSubmit() {
     this.mensaje = this.emailForm.get('contenido')!.value
-    console.log("Para:",this.emailForm.get('para')!.value);
-    console.log("Asunto:",this.emailForm.get('asunto')!.value);
-    console.log("Contenido:",this.emailForm.get('contenido')!.value);
+    console.log("Para:", this.emailForm.get('para')!.value);
+    console.log("Asunto:", this.emailForm.get('asunto')!.value);
+    console.log("Contenido:", this.emailForm.get('contenido')!.value);
     let fecha = this.date.toLocaleString("en-GB", {
       day: "2-digit",
-      month:"2-digit",
-      year:"2-digit",
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     });
     console.log(fecha)
     let nuevoCorreo = new Email()
@@ -125,9 +163,6 @@ export class AppComponent implements OnInit {
     nuevoCorreo.contenido = this.emailForm.get('contenido')!.value
     nuevoCorreo.fecha = fecha
     nuevoCorreo.enviado_por = this.usuario
-    this.emailService.guardar_email(nuevoCorreo).subscribe((res:any) => {
-      console.log(res)
-    }, (err:any) => console.log(err))
   }
 
 }

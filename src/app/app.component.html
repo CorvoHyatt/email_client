@@ -60,7 +60,7 @@
       <!-- Contenido correo -->
       <div class="col py-3">
         <ul class="list-group" *ngIf="flagEnviados == true">
-          <li class="list-group-item" *ngFor="let email of emailsPrueba; let i=index">
+          <li class="list-group-item" *ngFor="let email of emailsEnviados; let i=index">
             <div class="container text-center" (click)="seleccionaCorreo(email)" data-bs-toggle="modal" data-bs-target="#modalCorreo">
               <div class="row">
                 <div class="col-md-1 ">
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="col-md-4 ">
-                  {{email.enviado_por}}
+                  {{email.para}}
                 </div>
 
                 <div class="col-md-2 ">
@@ -83,7 +83,7 @@
         </ul>
 
         <ul class="list-group" *ngIf="flagRecibidos == true">
-          <li class="list-group-item" *ngFor="let emailRecibido of emailsPruebaRecibidos; let i=index">
+          <li class="list-group-item" *ngFor="let emailRecibido of emailsRecibidos; let i=index">
             <div class="container text-center" (click)="seleccionaCorreo(emailRecibido)" data-bs-toggle="modal" data-bs-target="#modalCorreo">
               <div class="row">
                 <div class="col-md-1 ">
@@ -137,10 +137,10 @@
             </div>
           </div>
 
-          <div class="container border border-dark rounded">
-            <p class="text-break">
-            {{correoActual.contenido}}
-            </p>
+          <div class="container border border-dark rounded" [innerHTML]="correoActual.contenido">
+            <!-- <p class="text-break"> -->
+            <!-- {{correoActual.contenido}} -->
+            <!-- </p> -->
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid text-center">
-          <form [formGroup]="emailForm" (ngSubmit)="onSubmit()" class="formCorreo input-group mb-3">
+          <form [formGroup]="emailForm" class="formCorreo input-group mb-3">
             <div class="container text-center">
               <div class="row">
                 <div class="col">
@@ -180,7 +180,7 @@
                   <quill-editor [modules] = "config" formControlName="contenido" class="editorStyle"></quill-editor>
                 </div>
               </div>
-              <button type="button" class="btn btn-warning " data-bs-dismiss="modal">Enviar</button>
+              <button type="button" class="btn btn-warning " data-bs-dismiss="modal" (click)="onSubmit()">Enviar</button>
             </div>
           </form>
         </div>

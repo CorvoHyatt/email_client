@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   flagRecibidos: boolean = false;
   flagEnviados: boolean = true;
   correoActual: Email = new Email();
+  cuentaLogueada: string = "prueba@logueado.com"
 
   usuario: string;
   para: string;
@@ -59,38 +60,38 @@ export class AppComponent implements OnInit {
       'para': new FormControl(''),
       'asunto': new FormControl('')
     })
-    // const email = new Email()
-    // email.enviado_por = "corvohyatt@gmail.com"
-    // email.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    // email.para = "snifex@gmail.com"
-    // email.asunto = "Saludos cordiales"
-    // email.fecha = "10/10/10"
-    //
-    // const email_aux = new Email()
-    // email_aux.enviado_por = "snifex@gmail.com"
-    // email_aux.para = "corvohyatt@gmail.com"
-    // email_aux.asunto = "Saludos cordiales Doctor"
-    // email_aux.fecha = "05/02/2023"
-    // email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    //
-    // const emailAuxRecibidos = new Email()
-    // emailAuxRecibidos.enviado_por = "recibidos@gmail.com"
-    // emailAuxRecibidos.para = "corvorecibidos@gmail.com"
-    // emailAuxRecibidos.asunto = "Saludos cordiales recibidos"
-    // emailAuxRecibidos.fecha = "10/02/2023"
-    // emailAuxRecibidos.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    //
-    // const emailAuxRecibidos2 = new Email()
-    // emailAuxRecibidos2.enviado_por = "recibidos@gmail.com"
-    // emailAuxRecibidos2.para = "corvorecibidos@gmail.com"
-    // emailAuxRecibidos2.asunto = "Saludos cordiales recibidos"
-    // emailAuxRecibidos2.fecha = "10/02/2023"
-    // emailAuxRecibidos2.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
-    // //
-    // // this.emailsEnviados.push(email, email_aux)
-    // //
-    // // this.emailsRecibidos.push(emailAuxRecibidos, emailAuxRecibidos2)
-    // //
+    const email = new Email()
+    email.enviado_por = "corvohyatt@gmail.com"
+    email.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    email.para = "snifex@gmail.com"
+    email.asunto = "Saludos cordiales"
+    email.fecha = "10/10/10"
+    
+    const email_aux = new Email()
+    email_aux.enviado_por = "snifex@gmail.com"
+    email_aux.para = "corvohyatt@gmail.com"
+    email_aux.asunto = "Saludos cordiales Doctor"
+    email_aux.fecha = "05/02/2023"
+    email_aux.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    
+    const emailAuxRecibidos = new Email()
+    emailAuxRecibidos.enviado_por = "recibidos@gmail.com"
+    emailAuxRecibidos.para = "corvorecibidos@gmail.com"
+    emailAuxRecibidos.asunto = "Saludos cordiales recibidos"
+    emailAuxRecibidos.fecha = "10/02/2023"
+    emailAuxRecibidos.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    
+    const emailAuxRecibidos2 = new Email()
+    emailAuxRecibidos2.enviado_por = "recibidos@gmail.com"
+    emailAuxRecibidos2.para = "corvorecibidos@gmail.com"
+    emailAuxRecibidos2.asunto = "Saludos cordiales recibidos"
+    emailAuxRecibidos2.fecha = "10/02/2023"
+    emailAuxRecibidos2.contenido = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis non eius, esse, reiciendis dolor minima repellat eveniet ex sint veniam repellendus quidem distinctio vero iure inventore incidunt asperiores? Dolorum!"
+    
+    this.emailsEnviados.push(email, email_aux)
+    
+    this.emailsRecibidos.push(emailAuxRecibidos, emailAuxRecibidos2)
+    
     this.actualizar_correos()
   }
 
